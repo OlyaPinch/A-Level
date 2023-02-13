@@ -4,8 +4,7 @@ public class CakeWithJam : Cake
 {
     public CakeWithJam(string nameOfJam)
     {
-        Name = nameOfJam + "Cake";
-
+        Name = nameOfJam + " Cake";
         ComponentsList.Add(new Component(nameOfJam, 30));
     }
 

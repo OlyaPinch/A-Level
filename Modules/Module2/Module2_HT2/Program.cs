@@ -13,8 +13,7 @@
             cake2.Description();
             cake3.Description();
             cake4.Description();
-
-
+            
             OrderItem[] orderItems = { new OrderItem(cake1, 3), new OrderItem(cake2, 5), new OrderItem(cake3, 10), new OrderItem(cake4, 2) };
 
             var order = new Order(orderItems);

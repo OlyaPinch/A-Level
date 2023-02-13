@@ -15,7 +15,7 @@ namespace Module2_HT2
         }
 
         public string Name { get; set; }
-        public double  Weight{ get; set; }
+        public double Weight { get; set; }
 
         public void Print()
         {

@@ -7,7 +7,8 @@ public class OrderItem
         OrderItems = orderItems;
         Quantity = quantity;
     }
-   public IBakingSweet OrderItems { get; }
 
-   public int Quantity { get; set; }
+    public IBakingSweet OrderItems { get; }
+
+    public int Quantity { get; set; }
 }

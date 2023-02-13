@@ -11,18 +11,10 @@ namespace Module2_HT2
     {
         public static OrderItem SearchByName(this Order order, string name)
         {
-
-            return order.Items.FirstOrDefault(i=> i.OrderItems.Name == name);
-            /*foreach (var element in order.Items)
-            {
-                if (element.OrderItems.Name== name)
-                {
-                    Console.WriteLine($" In order we have {element.OrderItems.Name} {element.Quantity}  item  ");
-                }
-            }*/
+            return order.Items.FirstOrDefault(i => i.OrderItems.Name == name);
         }
 
-      
+
         public static double OrderWeight(this Order order)
         {
             return order.Items.Sum(i => i.OrderItems.Weight * i.Quantity);
