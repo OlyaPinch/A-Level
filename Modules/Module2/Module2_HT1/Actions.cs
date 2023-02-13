@@ -8,9 +8,9 @@ namespace Module2_HT1
 {
     internal interface IActions
     {
-        Result FirstMethod();
-        Result SecondMethod();
-        Result ThirdMethod();
+        Result LogInfoActionExample();
+        Result LogWarningActionExample();
+        Result LogErrorActionExample();
     }
 
     internal class Actions : IActions
@@ -23,26 +23,26 @@ namespace Module2_HT1
             _logger = logger;
         }
 
-        public Result FirstMethod()
+        public Result LogInfoActionExample()
 
         {
             Result info = new Result();
-            info.Message = $"Start method:{nameof(FirstMethod)}";
+            info.Message = $"Start method:{nameof(LogInfoActionExample)}";
             info.Status = true;
             _logger.Info(info.Message);
             return info;
         }
 
-        public Result SecondMethod()
+        public Result LogWarningActionExample()
         {
             Result warning = new Result();
             warning.Status = true;
-            warning.Message = $"Skipped logic in method:{nameof(SecondMethod)}";
+            warning.Message = $"Skipped logic in method:{nameof(LogWarningActionExample)}";
             _logger.Warning(warning.Message);
             return warning;
         }
 
-        public Result ThirdMethod()
+        public Result LogErrorActionExample()
         {
             Result error = new Result();
             error.Message = "I broke a logic";

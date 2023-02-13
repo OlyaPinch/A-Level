@@ -9,8 +9,6 @@
             var log = Logger.Instance();
             var action = new Actions(log);
 
-
-
             var start = new Starter(action, log);
             start.Run();
         }

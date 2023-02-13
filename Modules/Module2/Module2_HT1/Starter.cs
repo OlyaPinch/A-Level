@@ -31,19 +31,19 @@ namespace Module2_HT1
                 {
                     case 1:
                     {
-                       res= _action.FirstMethod();
+                       res= _action.LogInfoActionExample();
                         
                         break;
                     }
                     case 2:
                     {
-                        res=_action.SecondMethod();
+                        res=_action.LogWarningActionExample();
                         
                         break;
                     }
                     case 3:
                     {
-                       res= _action.ThirdMethod();
+                       res= _action.LogErrorActionExample();
                       
                         break;
                     }
