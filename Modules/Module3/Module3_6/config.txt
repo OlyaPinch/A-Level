@@ -1,0 +1,1 @@
+{"DirectoryName":"LogDirectory","MaxQuantityOfFile":3,"BackupNumber":10}
