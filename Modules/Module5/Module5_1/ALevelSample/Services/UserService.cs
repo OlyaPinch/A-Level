@@ -39,6 +39,10 @@ public class UserService : IUserService
         {
             _logger.LogInformation($"User with id = {result.Data.Id} was found");
         }
+        else
+        {
+            _logger.LogInformation($"User with id{id} was not found");
+        }
 
         return result?.Data;
     }
@@ -64,16 +68,18 @@ public class UserService : IUserService
 
     public async Task<List<UserDto>> GetUsers(int page)
     {
-        var url = $"{_options.Host}{_userApi}?page={page}";
-
         var result =
-            await _httpClientService.SendAsync<BaseResponse<List<UserDto>>, object>(
+            await _httpClientService.SendAsync<BaseListResponse<UserDto>, object>(
                 $"{_options.Host}{_userApi}?page={page}", HttpMethod.Get, null);
         if (result != null)
         {
             _logger.LogInformation($"Received users count:{result.Data.Count}");
         }
-
+        else
+        {
+            _logger.LogInformation($"Page {page} was not found");
+        }
+        
         return result?.Data ?? new List<UserDto>();
     }
 
@@ -90,7 +96,11 @@ public class UserService : IUserService
 
         if (result != null)
         {
-            _logger.LogInformation($"User with id = {result?.UpdatedAt} was put");
+            _logger.LogInformation($"User with id{id} was put {result?.UpdatedAt} ");
+        }
+        else
+        {
+            _logger.LogInformation($"User with id{id} was not found");
         }
 
         return result;
@@ -109,7 +119,11 @@ public class UserService : IUserService
 
         if (result != null)
         {
-            _logger.LogInformation($"User with id = {result?.UpdatedAt} was patch");
+            _logger.LogInformation($"User with id {id} was patch {result?.UpdatedAt}");
+        }
+        else
+        {
+            _logger.LogInformation($"User with id{id} was not found");
         }
 
         return result;
@@ -123,6 +137,10 @@ public class UserService : IUserService
         if (result)
         {
             _logger.LogInformation($"User by id {id} was deleted");
+        }
+        else
+        {
+            _logger.LogInformation($"User with id{id} was not found");
         }
 
         return result;

@@ -34,13 +34,7 @@ public class InternalHttpClientService : IInternalHttpClientService
         var result = await client.SendAsync(httpMessage);
         var resultContent = await result.Content.ReadAsStringAsync();
 
-        if (result.IsSuccessStatusCode)
-        {
-            var response = JsonConvert.DeserializeObject<TResponse>(resultContent);
-            return response!;
-        }
-
-        if (!string.IsNullOrEmpty(resultContent))
+        if (result.IsSuccessStatusCode || !string.IsNullOrEmpty(resultContent))
         {
             var response = JsonConvert.DeserializeObject<TResponse>(resultContent);
             return response!;

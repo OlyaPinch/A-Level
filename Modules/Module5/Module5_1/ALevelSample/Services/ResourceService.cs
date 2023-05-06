@@ -42,20 +42,26 @@ namespace ALevelSample.Services
             {
                 _logger.LogInformation($"Resource with id = {result.Data.Id} was found");
             }
+            else
+            {
+                _logger.LogInformation($"Resource with id = {id} was not found");
+            }
 
             return result?.Data;
         }
 
         public async Task<List<ResourceDto>> GetResources(int page)
         {
-            var url = $"{_options.Host}{_resourceApi}?page={page}";
-
             var result =
-                await _httpClientService.SendAsync<BaseResponse<List<ResourceDto>>, object>(
+                await _httpClientService.SendAsync<BaseListResponse<ResourceDto>, object>(
                     $"{_options.Host}{_resourceApi}?page={page}", HttpMethod.Get, null);
             if (result != null)
             {
-                _logger.LogInformation($"Received Resourse count:{result.Data.Count}");
+                _logger.LogInformation($"Received Resources count:{result.Data.Count}");
+            }
+            else
+            {
+                _logger.LogInformation($"Page {page} was NOT found");
             }
 
             return result?.Data ?? new List<ResourceDto>();

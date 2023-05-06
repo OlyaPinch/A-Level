@@ -20,7 +20,7 @@ public class App
 
     public async Task Start()
     {
-        var users = await _userService.GetUsers(3);
+        var users = await _userService.GetUsers(2);
         var user = await _userService.GetUserById(2);
         var userNotFound = await _userService.GetUserById(23);
         var userInfo = await _userService.CreateUser("morpheus", "leader");
