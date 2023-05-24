@@ -60,10 +60,10 @@ class UserStore {
                 email:this.email,
                 last_name:this.lastName,
                 first_name:this.firstName,
-                
-                
+               
             }
             await userApi.updateUser(id,user);
+        
         }
         catch (e) {
             if (e instanceof Error) {

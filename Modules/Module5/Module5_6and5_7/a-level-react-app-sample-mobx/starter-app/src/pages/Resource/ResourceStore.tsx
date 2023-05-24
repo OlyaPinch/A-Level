@@ -4,8 +4,8 @@
     observable,
     runInAction,
 } from "mobx";
-import {IUser} from "../../interfaces/users";
-import * as userApi from "../../api/modules/users";
+import {IResource} from "../../interfaces/resources";
+import * as resourceApi from "../../api/modules/resources";
 import AuthStore from "../../stores/AuthStore";
 
 
@@ -13,8 +13,11 @@ class ResourceStore {
 
     private authStore: AuthStore;
 
-    email = '';
-    password = '';
+    name = '';
+    year: number = 0;
+    pantone_value = " ";
+    color = "";
+
     error = '';
     isLoading = false;
 
@@ -23,26 +26,40 @@ class ResourceStore {
         makeAutoObservable(this);
     }
 
-    changeEmail(email: string) {
-        this.email = email;
+    changeName(name: string) {
+        this.name = name;
         if (!!this.error) {
             this.error = '';
         }
     }
 
-    changePassword(password: string) {
-        this.password = password;
+    changeYear(year: number) {
+        this.year = year;
         if (!!this.error) {
             this.error = '';
         }
     }
 
-    async login() {
+    changeColor(color: string): void {
+        this.color = color;
+        if (!!this.error) {
+            this.error = '';
+
+        }
+    }
+
+    async update(id: string) {
         try {
             this.isLoading = true;
-            await this.authStore.login(this.email, this.password);
-        }
-        catch (e) {
+            const resourse = {
+                name: this.name,
+                year: this.year,
+                pantone_value: this.pantone_value,
+
+            }
+            await resourceApi.update(resourse as IResource);
+            alert(" your changes sucsesfull")
+        } catch (e) {
             if (e instanceof Error) {
                 this.error = e.message;
             }

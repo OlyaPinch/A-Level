@@ -1,12 +1,27 @@
 import React, {useContext} from 'react'
-import {Box, Button, CircularProgress, TextField, Typography} from '@mui/material'
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Dialog, DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TextField,
+    Typography
+} from '@mui/material'
 import LoginStore from "./LoginStore";
 import {AppStoreContext} from "../../App";
 import {observer} from "mobx-react-lite";
 
+
 const Login = () => {
     const appStore = useContext(AppStoreContext);
     const store = new LoginStore(appStore.authStore);
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <Box
@@ -25,6 +40,8 @@ const Login = () => {
                  {
                      event.preventDefault()
                      await store.login()
+                     setOpen(true);
+                     
                  }}
                  noValidate sx={{ mt: 1 }}>
                 <TextField
@@ -67,8 +84,32 @@ const Login = () => {
                 {!!appStore.authStore.token && (
                     <p className="mt-3 mb-3" style={{ color: 'green', fontSize: 14, fontWeight: 700 }}>{`Success! Token is: ${appStore.authStore.token}`}</p>
                 )}
+                
+                
             </Box>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Complete"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Login sucssesful
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} autoFocus>
+                        Ok
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Box>
+        
     )
 }
 

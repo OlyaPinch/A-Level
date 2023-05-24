@@ -7,6 +7,7 @@ import {IRegisterUser} from "../../interfaces/RegisterUser";
 
 
 const Registration= () => {
+   // const store = new RegistrationStore(appStore.authStore);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -69,7 +70,8 @@ const Registration= () => {
                 password,
             };
 
-          //  onRegister(newUser);
+           // store.Registration(newUser)
+            
         }
     };
 

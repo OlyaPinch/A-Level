@@ -7,12 +7,16 @@ import {
     CircularProgress,
     Container,
 
+    Dialog, DialogActions, DialogContentText,
+
+    DialogContent,
+
     Grid,
 
 
     Pagination,
 
-    Typography
+    Typography, DialogTitle
 } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -40,6 +44,10 @@ const Resource: FC<any> = (): ReactElement => {
     const { id } = useParams()
     const appStore = useContext(AppStoreContext);
     const store = new ResourceStore(appStore.authStore);
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         if (id) {
@@ -48,6 +56,7 @@ const Resource: FC<any> = (): ReactElement => {
                     setIsLoading(true)
                     const res = await resourceApi.getById(id)
                     setResource(res.data)
+                    
                 } catch (e) {
                     if (e instanceof Error) {
                         console.error(e.message)
@@ -96,6 +105,7 @@ const Resource: FC<any> = (): ReactElement => {
                                      onSubmit={async (event) =>
                                      {
                                          event.preventDefault()
+                                         setOpen(true);
 
                                      }}
                                      noValidate sx={{ mt: 1 }}>
@@ -107,7 +117,7 @@ const Resource: FC<any> = (): ReactElement => {
                                         label="Name"
                                         name="Name"
                                         value={resource?.name}
-                                      //  onChange={(event) => setFirstName(event.target.value)}
+                                      // onChange={(event) => setName(event.target.value)}
                                         autoFocus
                                     />
                                     <TextField
@@ -154,17 +164,39 @@ const Resource: FC<any> = (): ReactElement => {
                                         sx={{ mt: 3, mb: 2 }}
                                     >
                                         {store.isLoading ? (
-                                            <CircularProgress />
+                                            <CircularProgress /> 
                                         ) : (
                                             'Update'
                                         )}
                                     </Button>
                                     {!!appStore.authStore.token && (
                                         <p className="mt-3 mb-3" style={{ color: 'green', fontSize: 14, fontWeight: 700 }}>{`Success! Token is: ${appStore.authStore.token}`}</p>
+                                       
                                     )}
                                 </Box>
                             </Box>
                         </Grid>
+
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"Complete"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    Resource was updated
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>                                
+                                <Button onClick={handleClose} autoFocus>
+                                    Ok
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                         
                        
                     </>

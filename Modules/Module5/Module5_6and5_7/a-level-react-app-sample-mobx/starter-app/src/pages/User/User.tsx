@@ -5,7 +5,7 @@ import {
     CardContent,
     CardMedia,
     CircularProgress,
-    Container,
+    Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
 
     Grid,
 
@@ -41,6 +41,10 @@ const User: FC<any> = (): ReactElement => {
     const [email,setEmail] = useState(store.email);
     const [firstName,setFirstName] = useState(store.firstName);
     const [lastName,setLastName] = useState(store.lastName);
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         setEmail(store.email)
@@ -115,6 +119,7 @@ const User: FC<any> = (): ReactElement => {
                                      onSubmit={async (event) =>
                                      {
                                          event.preventDefault()
+                                         setOpen(true);
                                         
                                      }}
                                      noValidate sx={{ mt: 1 }}>
@@ -167,10 +172,29 @@ const User: FC<any> = (): ReactElement => {
                                             'Update'
                                         )}
                                     </Button>
-                                    {!!appStore.authStore.token && (
-                                        <p className="mt-3 mb-3" style={{ color: 'green', fontSize: 14, fontWeight: 700 }}>{`Success! Token is: ${appStore.authStore.token}`}</p>
-                                    )}
+                                   
                                 </Box>
+                                <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">
+                                        {"Complete"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            User updated
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose} autoFocus>
+                                            Ok
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+                                
                             </Box>
                         </Grid>
                        
