@@ -10,6 +10,9 @@ class AuthStore {
     constructor() {
         makeAutoObservable(this);
     }
+    logout() {
+        this.token = '';
+    }
 
     async login(email: string, password: string) {
         const result = await authApi.login({email, password});

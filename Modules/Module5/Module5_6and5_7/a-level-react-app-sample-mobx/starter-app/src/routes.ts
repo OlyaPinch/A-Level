@@ -11,6 +11,8 @@ import Resources from "./pages/Resources";
 import Resource from "./pages/Resource";
 import Registration from "./pages/Registration";
 import AuthStore from "./stores/AuthStore";
+import Logout from "./pages/LogOut";
+
 
 // interface
 interface Route {
@@ -91,10 +93,10 @@ export const routes: Array<Route> = [
     {
         key: 'logout-route',
         title: 'Logout',
-        path: '/loguot',
+        path: '/logout',
         enabled: true,
         isPrivate: true,
-        component: Registration
+        component: Logout
     }
     
     
