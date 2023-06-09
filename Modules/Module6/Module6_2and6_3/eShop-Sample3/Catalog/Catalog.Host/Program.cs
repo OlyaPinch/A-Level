@@ -1,9 +1,10 @@
 using Catalog.Host.Configurations;
 using Catalog.Host.Data;
-using Catalog.Host.Repositories;
-using Catalog.Host.Repositories.Interfaces;
-using Catalog.Host.Services;
-using Catalog.Host.Services.Interfaces;
+
+using Infrastructure.Repositories;
+using Infrastructure.Repositories.Interfaces;
+using Infrastructure.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var configuration = GetConfiguration();
@@ -20,7 +21,9 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 var s = configuration["ConnectionString"] ?? string.Empty.ToString();
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(s));
+
 builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();
+
 
 var app = builder.Build();
 

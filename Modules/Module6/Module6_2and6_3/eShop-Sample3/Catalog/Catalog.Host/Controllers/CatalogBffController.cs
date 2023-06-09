@@ -1,14 +1,15 @@
 using System.Net;
-using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Requests;
-using Catalog.Host.Models.Response;
-using Catalog.Host.Services;
-using Catalog.Host.Services.Interfaces;
 using Infrastructure;
+using Infrastructure.Data.Entities;
+using Infrastructure.Models.Requests;
+using Infrastructure.Models.Response;
+using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+
 
 namespace Catalog.Host.Controllers;
 

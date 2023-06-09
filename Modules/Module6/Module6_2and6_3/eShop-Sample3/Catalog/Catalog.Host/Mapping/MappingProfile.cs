@@ -1,7 +1,7 @@
 using AutoMapper;
-using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Requests;
+using Infrastructure.Data.Entities;
 
 namespace Catalog.Host.Mapping;
 

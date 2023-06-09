@@ -1,4 +1,5 @@
-using Catalog.Host.Data.Entities;
+using Infrastructure.Data.Entities;
+using Infrastructure.Services.Interfaces;
 
 namespace Catalog.Host.Data;
 
