@@ -58,13 +58,13 @@ namespace Infrastructure.Repositories
             return new PaginatedItems<T>() { TotalCount = totalItems, Data = itemsOnPage };
         }
 
-        public async Task<PaginatedItems<T>> GetByPageAsync(int pageIndex, int pageSize,
+        public async Task<PaginatedItems<T>> GetByPageAsync(int pageIndex, int pageSize, Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include)
         {
             var totalItems = await _dbContext.Set<T>()
-                .LongCountAsync();
+                .LongCountAsync(filter);
 
-            var query = _dbContext.Set<T>().AsQueryable();
+            var query = _dbContext.Set<T>().AsQueryable().Where(filter);
 
             if (include != null)
             {

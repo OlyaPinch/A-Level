@@ -25,12 +25,14 @@ namespace Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<PaginatedItemsResponse<TResulDto>> GetEntitiesAsync(int pageSize, int pageIndex,
+        public async Task<PaginatedItemsResponse<TResulDto>> GetEntitiesAsync(int pageSize, int pageIndex, Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
         {
             return await ExecuteSafeAsync(async () =>
             {
-                var result = await _repository.GetByPageAsync(pageIndex, pageSize,
+                if (filter == null)
+                    filter = i => true;
+                var result = await _repository.GetByPageAsync(pageIndex, pageSize,filter,
                     include
                 );
                 return new PaginatedItemsResponse<TResulDto>()

@@ -3,12 +3,14 @@ using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Requests;
 using Infrastructure;
 using Infrastructure.Data.Entities;
+using Infrastructure.Models.Enums;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using MVC.Dtos;
 
 
 namespace Catalog.Host.Controllers;
@@ -47,9 +49,15 @@ public class CatalogBffController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CatalogItemDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Items(PaginatedItemsRequest request)
+    public async Task<IActionResult> Items(PaginatedItemsRequest<CatalogFilter> request)
+
     {
-        var result = await _entityService.GetEntitiesAsync(request.PageSize, request.PageIndex, ItemsInclude);
+        var result = await _entityService.GetEntitiesAsync(request.PageSize, request.PageIndex,
+            i => (i.CatalogBrandId == request.Filter.BrandId || request.Filter.BrandId == 0) &&
+                 (i.CatalogTypeId == request.Filter.TypeId || request.Filter.TypeId == 0),
+            ItemsInclude);
+
+
         return Ok(result);
     }
 

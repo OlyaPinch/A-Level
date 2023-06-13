@@ -7,7 +7,7 @@ namespace Infrastructure.Services.Interfaces
 {
     public interface IEntityService<T, TResulDto> where T : EntityBase
     {
-        Task<PaginatedItemsResponse<TResulDto>> GetEntitiesAsync(int pageSize, int pageIndex,
+        Task<PaginatedItemsResponse<TResulDto>> GetEntitiesAsync(int pageSize, int pageIndex, Expression<Func<T, bool>>? filter = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
         Task<TResulDto> GetItemById(int id);

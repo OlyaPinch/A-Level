@@ -1,6 +1,5 @@
 using Catalog.Host.Configurations;
 using Catalog.Host.Data;
-
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Interfaces;
 using Infrastructure.Services;

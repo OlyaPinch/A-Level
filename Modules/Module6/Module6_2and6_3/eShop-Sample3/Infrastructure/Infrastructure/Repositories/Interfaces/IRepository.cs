@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories.Interfaces
         Task<PaginatedItems<T>> GetByExpressionAsync(int pageSize, int pageIndex, Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
-        Task<PaginatedItems<T>> GetByPageAsync(int pageIndex, int pageSize,
+        Task<PaginatedItems<T>> GetByPageAsync(int pageIndex, int pageSize, Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
         Task<int?> Add(T entity);
