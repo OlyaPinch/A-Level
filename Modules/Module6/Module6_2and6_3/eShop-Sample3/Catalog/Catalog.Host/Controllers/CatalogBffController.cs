@@ -3,19 +3,23 @@ using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Requests;
 using Infrastructure;
 using Infrastructure.Data.Entities;
+using Infrastructure.Identity;
+using Infrastructure.Models;
 using Infrastructure.Models.Enums;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using MVC.Dtos;
+
 
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
+[Authorize(Policy = AuthPolicy.AllowEndUserPolicy)]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogBffController : ControllerBase
 {
@@ -48,6 +52,7 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CatalogItemDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Items(PaginatedItemsRequest<CatalogFilter> request)
 

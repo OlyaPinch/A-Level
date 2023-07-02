@@ -6,10 +6,12 @@ namespace MVC.Services;
 public class HttpClientService : IHttpClientService
 {
     private readonly IHttpClientFactory _clientFactory;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public HttpClientService(IHttpClientFactory clientFactory)
+    public HttpClientService(IHttpClientFactory clientFactory,IHttpContextAccessor httpContextAccessor)
     {
         _clientFactory = clientFactory;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<TResponse> SendAsync<TResponse>(string url, HttpMethod method, object? content)
@@ -19,6 +21,13 @@ public class HttpClientService : IHttpClientService
         var httpMessage = new HttpRequestMessage();
         httpMessage.RequestUri = new Uri(url);
         httpMessage.Method = method;
+        var tokenAsync = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+
+        if (tokenAsync is not null)
+        {
+            httpMessage.Headers.Add("Authorization", $"Bearer {tokenAsync}");
+        }
+
 
         if (content != null)
         {

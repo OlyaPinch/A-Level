@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
+using Catalog.Host.Models.Dtos;
+using Infrastructure.Models;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
-using MVC.Dtos;
+
 using MVC.Models.Enums;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
+
 
 namespace MVC.Services;
 
@@ -52,9 +55,9 @@ public class CatalogService : ICatalogService
                     PageSize = pagezSize
                 });
 
-        Debug.Assert(result != null, nameof(result) + " != null");
-        return result.Data.Select(i => new SelectListItem(i.Brand, i.Id.ToString())
-        );
+        //Debug.Assert(result != null, nameof(result) + " != null");
+        return result?.Data?.Select(
+            i => new SelectListItem(i.Brand, i.Id.ToString()));
     }
 
     public async Task<IEnumerable<SelectListItem>> GetTypes(int page = 0, int pagezSize = Int32.MaxValue)
@@ -68,8 +71,19 @@ public class CatalogService : ICatalogService
                     PageSize = pagezSize
                 });
 
+
         Debug.Assert(result != null, nameof(result) + " != null");
-        return result.Data.Select(i => new SelectListItem(i.Type, i.Id.ToString())
-        );
+
+        return result?.Data?.Select(i => new SelectListItem(i.Type, i.Id.ToString())) ?? new List<SelectListItem>();
     }
+
+ public async Task<CatalogItem> GetItemById(int id)
+ {
+
+     var result = await _httpClient.SendAsync<CatalogItem>(
+         $"{_settings.Value.CatalogUrl}/Items?id={id}",
+         HttpMethod.Get);
+         
+     return result;
+ }
 }

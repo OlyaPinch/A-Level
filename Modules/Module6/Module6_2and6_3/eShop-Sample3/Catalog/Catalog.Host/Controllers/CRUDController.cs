@@ -5,14 +5,17 @@ using Catalog.Host.Models.Requests;
 using Infrastructure;
 using Infrastructure.Data.Abstractions;
 using Infrastructure.Data.Entities;
+using Infrastructure.Identity;
 using Infrastructure.Models.Response;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
+[Authorize(Policy = AuthPolicy.AllowEndUserPolicy)]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CRUDController<T, TResultDto, TRequst> : ControllerBase where T : EntityBase
 {

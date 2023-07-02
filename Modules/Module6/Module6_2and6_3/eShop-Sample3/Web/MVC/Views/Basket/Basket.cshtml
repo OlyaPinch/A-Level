@@ -1,0 +1,46 @@
+﻿@using NSubstitute.ReceivedExtensions
+@model MVC.ViewModels.BasketViewModels.BasketViewModels
+
+@{
+    ViewBag.Title = "title";
+
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+
+    </div>
+</section>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Sum</th>
+
+    </tr>
+    </thead>
+
+    @foreach (var header in @Model.Basket)
+    {
+        <tr>
+            <td>@header.Id</td>
+            <td>@header.Name</td>
+            <td>@header.Quantity</td>
+            <td>@header.Price</td>
+            <td>@(header.Price * header.Quantity)</td>
+
+        </tr>
+    }
+    <tfoot>
+    <tr>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+        <th scope="col">@Model.Basket.Sum(i => i.Quantity)</th>
+        <th scope="col">-</th>
+        <th scope="col">@Model.Basket.Sum(i => i.Quantity * i.Price)</th>
+
+    </tr>
+    </tfoot>
+</table>

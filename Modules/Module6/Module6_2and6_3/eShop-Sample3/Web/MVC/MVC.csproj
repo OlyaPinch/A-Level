@@ -8,8 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="IdentityModel" Version="4.4.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
       <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.161" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,10 +25,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Models\Requests\" />
       <Folder Include="wwwroot\assets\images\" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructure.UnitTests\Infrastructure.UnitTests.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 

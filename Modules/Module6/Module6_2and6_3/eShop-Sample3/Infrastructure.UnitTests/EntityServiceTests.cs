@@ -37,14 +37,14 @@ namespace Infrastructure.UnitTests
                 PageSize = pageSize
             };
 
-            repository.GetByPageAsync(pageIndex, pageSize, include)
+            repository.GetByPageAsync(pageIndex, pageSize,null, include)
                 .Returns(new PaginatedItems<EntityBase> { TotalCount = 20, Data = new List<EntityBase> { new EntityBase(), new EntityBase() } });
 
             mapper.Map<ResultDto>(Arg.Any<EntityBase>())
                 .Returns(new ResultDto());
 
             // Act
-            var result = await service.GetEntitiesAsync(pageSize, pageIndex, include);
+            var result = await service.GetEntitiesAsync(pageSize, pageIndex, i=>true,include);
 
             // Assert
             Assert.Equal(expectedResult.Count, result.Count);
