@@ -55,6 +55,7 @@ builder.Services.Configure<AppSettings>(configuration);
 builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<IHttpClientService, HttpClientService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IBasketService, BasketService>();

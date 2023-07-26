@@ -1,6 +1,7 @@
 using Basket.Host.Models;
 using Basket.Host.Services.Interfaces;
 using Infrastructure.Data.Entities;
+using Infrastructure.Models.Basket;
 using Infrastructure.Models.Response;
 
 namespace Basket.Host.Services;

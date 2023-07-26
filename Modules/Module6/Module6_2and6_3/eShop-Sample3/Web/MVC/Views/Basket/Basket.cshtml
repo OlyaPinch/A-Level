@@ -1,8 +1,10 @@
 ﻿@using NSubstitute.ReceivedExtensions
+@using Infrastructure.Models.Basket
 @model MVC.ViewModels.BasketViewModels.BasketViewModels
 
 @{
     ViewBag.Title = "title";
+    Layout = "_Layout";
 
 }
 <section class="esh-catalog-hero">
@@ -10,6 +12,8 @@
 
     </div>
 </section>
+
+
 <table class="table">
     <thead>
     <tr>
@@ -21,8 +25,9 @@
 
     </tr>
     </thead>
-
-    @foreach (var header in @Model.Basket)
+    @*  @if (Model.Basket != null)
+    {*@
+    @foreach (var header in @Model?.Basket ?? new List<BasketDataItem>())
     {
         <tr>
             <td>@header.Id</td>
@@ -43,4 +48,16 @@
 
     </tr>
     </tfoot>
-</table>
+    }
+    @* else
+    {
+        <p>
+            Список порожній.
+        </p>
+    }*@
+
+</table >
+<input type="hidden" asp-for="@Model.Basket" name="currentBasket"/>
+<a asp-area="" asp-controller="Order" asp-action="Order" class="esh-identity-name esh-identity-name--upper">
+    Add to Order
+</a>

@@ -1,4 +1,4 @@
-﻿using Basket.Host.Models;
+﻿using Infrastructure.Models.Basket;
 using MVC.ViewModels;
 
 namespace MVC.Services.Interfaces;

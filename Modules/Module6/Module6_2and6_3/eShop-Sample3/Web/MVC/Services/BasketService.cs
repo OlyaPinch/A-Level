@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Basket.Host.Models;
+using Infrastructure.Models.Basket;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
 using Microsoft.EntityFrameworkCore;

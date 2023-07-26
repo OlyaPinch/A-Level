@@ -1,6 +1,7 @@
 using Basket.Host.Models;
 using Basket.Host.Services.Interfaces;
 using Infrastructure.Identity;
+using Infrastructure.Models.Basket;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
 using Microsoft.AspNetCore.Authorization;

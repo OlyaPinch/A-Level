@@ -1,4 +1,5 @@
 using Basket.Host.Models;
+using Infrastructure.Models.Basket;
 using Infrastructure.Models.Response;
 
 namespace Basket.Host.Services.Interfaces;

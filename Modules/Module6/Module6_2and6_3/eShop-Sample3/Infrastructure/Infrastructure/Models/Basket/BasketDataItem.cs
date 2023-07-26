@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Basket.Host.Models;
+﻿namespace Infrastructure.Models.Basket;
 
 public class BasketDataItem
 {
-    
-   public int Id { get; set; }
+    public int Id { get; set; }
 
     public string? Name { get; set; }
 
