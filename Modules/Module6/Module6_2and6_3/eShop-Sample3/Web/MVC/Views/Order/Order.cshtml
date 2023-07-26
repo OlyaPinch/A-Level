@@ -1,0 +1,56 @@
+﻿@model MVC.ViewModels.OrderViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+
+    </div>
+</section>
+
+<h2>Order</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Sum</th>
+
+    </tr>
+    </thead>
+    @*  @if (Model.Basket != null)
+    {*@
+    @foreach (var header in @Model.Order)
+    {
+        <tr>
+            <td>@header.ProductId</td>
+            <td>@header.ProductName</td>
+            <td>@header.Units</td>
+            <td>@header.UnitPrice</td>
+            <td>@(header.UnitPrice * header.Units)</td>
+
+        </tr>
+    }
+    <tfoot>
+    <tr>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+        <th scope="col">@Model.Order.Sum(i => i.Units)</th>
+        <th scope="col">-</th>
+        <th scope="col">@Model.Order.Sum(i => i.UnitPrice * i.Units)</th>
+
+    </tr>
+    </tfoot>
+    }
+    @* else
+    {
+        <p>
+            Список порожній.
+        </p>
+    }*@
+    
+</table >

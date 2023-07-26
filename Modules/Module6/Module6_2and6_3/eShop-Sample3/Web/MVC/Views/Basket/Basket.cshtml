@@ -1,0 +1,63 @@
+﻿@using NSubstitute.ReceivedExtensions
+@using Infrastructure.Models.Basket
+@model MVC.ViewModels.BasketViewModels.BasketViewModels
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+
+    </div>
+</section>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Sum</th>
+
+    </tr>
+    </thead>
+    @*  @if (Model.Basket != null)
+    {*@
+    @foreach (var header in @Model?.Basket ?? new List<BasketDataItem>())
+    {
+        <tr>
+            <td>@header.Id</td>
+            <td>@header.Name</td>
+            <td>@header.Quantity</td>
+            <td>@header.Price</td>
+            <td>@(header.Price * header.Quantity)</td>
+
+        </tr>
+    }
+    <tfoot>
+    <tr>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+        <th scope="col">@Model.Basket.Sum(i => i.Quantity)</th>
+        <th scope="col">-</th>
+        <th scope="col">@Model.Basket.Sum(i => i.Quantity * i.Price)</th>
+
+    </tr>
+    </tfoot>
+    }
+    @* else
+    {
+        <p>
+            Список порожній.
+        </p>
+    }*@
+
+</table >
+<input type="hidden" asp-for="@Model.Basket" name="currentBasket"/>
+<a asp-area="" asp-controller="Order" asp-action="Order" class="esh-identity-name esh-identity-name--upper">
+    Add to Order
+</a>
